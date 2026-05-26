@@ -1,0 +1,33 @@
+# hermes-repo-watcher 配置 — 监控自身
+# 被 cron 调用的配置
+repos:
+  - wtofelix-glitch/hermes-repo-watcher
+
+interval: 30
+
+handlers:
+  pull_request:
+    - name: review-code
+      on: [opened, synchronize]
+      action: claude-code
+      template: pr-review
+      auto_confirm: false
+
+  issues:
+    - name: triage
+      on: [opened]
+      action: notify
+      template: issue-triage
+
+  push:
+    - name: quick-check
+      on: [main]
+      action: codex
+      template: commit-check
+      auto_confirm: true
+
+notify:
+  channel: stdout
+  on:
+    - handler:done
+    - error
