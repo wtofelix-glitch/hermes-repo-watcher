@@ -8,26 +8,26 @@ interval: 30
 handlers:
   pull_request:
     - name: review-code
-      on: [opened, synchronize]
+      "on": [opened, synchronize]
       action: claude-code
       template: pr-review
       auto_confirm: false
 
   issues:
     - name: triage
-      on: [opened]
+      "on": [opened]
       action: notify
       template: issue-triage
 
   push:
     - name: quick-check
-      on: [main]
+      "on": [main]
       action: codex
       template: commit-check
       auto_confirm: true
 
 notify:
   channel: stdout
-  on:
+  "on":
     - handler:done
     - error

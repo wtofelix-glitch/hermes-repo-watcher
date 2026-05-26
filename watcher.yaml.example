@@ -16,7 +16,7 @@ handlers:
   # ----- PR 事件 -----
   pull_request:
     - name: review-code
-      on: [opened, synchronize]           # 新PR / 新push到PR
+      "on": [opened, synchronize]           # 新PR / 新push到PR
       action: claude-code                 # 派 Claude Code 审查
       template: pr-review                 # 用 pr-review.md 模板
       auto_confirm: false                 # 等涛哥确认再执行
@@ -30,22 +30,22 @@ handlers:
   # ----- Issue 事件 -----
   issues:
     - name: triage
-      on: [opened]
+      "on": [opened]
       action: notify                      # 新 Issue 推微信通知
       template: issue-triage
 
   # ----- Push 事件 -----
   push:
     - name: quick-check
-      on: [main]                           # main 分支 push
+      "on": [main]                           # main 分支 push
       action: codex                        # 派 Codex CLI 做快速检查
       template: commit-check
       auto_confirm: true                   # push 后自动跑
 
 # ----- 通知配置 -----
 notify:
-  channel: weixin                          # 推送渠道
-  on:
+  channel: weixin
+  "on":
     - handler:done                         # handler 执行完通知
     - handler:needs_decision               # 需要涛哥决策的通知
     - error                                # 出错了通知
